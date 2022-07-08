@@ -9,7 +9,7 @@ class Parking {
         if (this.freeSpace <= 0) {
             throw new Error("Not enough parking space.")
         }
-        this.vehicles.push({ carModel, carNumber, payed: false })
+        this.vehicles.push({ carModel, carNumber, paid: false })
         this.freeSpace--
         return `The ${carModel}, with a registration number ${carNumber}, parked.`
     }
@@ -17,7 +17,7 @@ class Parking {
     removeCar(carNumber) {
         let car = this.vehicles.find(x => x.carNumber === carNumber)
         if (car) {
-            if (car.payed === false) {
+            if (car.paid === false) {
                 throw new Error(`${carNumber} needs to pay before leaving the parking lot.`)
             } else {
                 let index = this.vehicles.indexOf(car)
@@ -35,11 +35,11 @@ class Parking {
         if (!car) {
             throw new Error(`${carNumber} is not in the parking lot.`)
         }
-        if (car.payed === true) {
-            throw new Error(`${carNumber}'s driver has already payed his ticket.`)
+        if (car.paid === true) {
+            throw new Error(`${carNumber}'s driver has already paid his ticket.`)
         }
-        car.payed = true
-        return `${carNumber}'s driver successfully payed for his stay.`
+        car.paid = true
+        return `${carNumber}'s driver successfully paid for his stay.`
     }
  
     getStatistics(carNumber) {
@@ -49,27 +49,27 @@ class Parking {
  
         if (carNumber === undefined) {
             for (let car of sorted) {
-                let isPayed = ''
-                if (car.payed === false) {
-                    isPayed = 'Not payed'
+                let isPaid = ''
+                if (car.paid === false) {
+                    isPaid = 'Not paid'
                 } else {
-                    isPayed = 'Has payed'
+                    isPaid = 'Has paid'
                 }
-                result.push(`${car.carModel} == ${car.carNumber} - ${isPayed}`)
+                result.push(`${car.carModel} == ${car.carNumber} - ${isPaid}`)
             }
         } else {
             
             let car = this.vehicles.find(x => x.carNumber === carNumber)
-            let isPayed = ''
+            let isPaid = ''
             if(car === undefined){
                 return ''
             }
-            if (car.payed === false) {
-                isPayed = 'Not payed'
+            if (car.paid === false) {
+                isPaid = 'Not paid'
             } else {
-                isPayed = 'Has payed'
+                isPaid = 'Has paid'
             }
-            result.push(`${car.carModel} == ${car.carNumber} - ${isPayed}`)
+            result.push(`${car.carModel} == ${car.carNumber} - ${isPaid}`)
         }
         return result.join('\n')
     }
