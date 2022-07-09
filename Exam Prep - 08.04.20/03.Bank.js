@@ -21,15 +21,13 @@ class Bank{
     }
  
     depositMoney (personalId, amount){
-//         Both the personalId and the amount are numbers.
-// Check if the given personalId corresponds to a customer in the customers array, if not throw a new error:
-// “We have no customer with this ID!”
+
 let idInList = true;
 for (const account of this.allCustomers) {
     if(account.personalId == Number(personalId)){
-        // idInList = true
+        
         account.totalMoney +=Number(amount);
-        // n. {firstName} {lastName} made deposit of {amount}$!
+        
         let [firstName,lastName] =account.name.split(' ')
         account.transactions.unshift(`${account.tCounter}. ${firstName} ${lastName} made deposit of ${amount}$!`)
         account.tCounter +=1;
@@ -41,12 +39,6 @@ if(idInList){
     throw new Error(`We have no customer with this ID!`)
  }
  
- 
-// Otherwise add the amount to the corresponding customer in a property named totalMoney and
-//  store the transaction information to this customer 
-//  (for more clarity see the example below and the hints), 
-//  then return the total money of the corresponding customer and a dollar sign:
-// “{totalMoney}$”
     }
     withdrawMoney (personalId, amount){
         let idNotInList = true;
